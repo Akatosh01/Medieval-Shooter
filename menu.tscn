@@ -1,0 +1,102 @@
+[gd_scene load_steps=11 format=3 uid="uid://dllv5ap3kkck8"]
+
+[ext_resource type="Texture2D" uid="uid://lgc4xnykl5qe" path="res://Images/fondo1.jpg" id="1_5xobl"]
+[ext_resource type="Script" path="res://menu.gd" id="1_cnyda"]
+[ext_resource type="Texture2D" uid="uid://bk2kh6xbdyini" path="res://Images/pngwing.com.png" id="2_kfvwh"]
+[ext_resource type="AudioStream" uid="uid://d3niajdqwjnrx" path="res://MusicMenu/Our-Mountain_v003.mp3" id="3_rpdsj"]
+[ext_resource type="AudioStream" uid="uid://cqjuvcj366cdo" path="res://MusicMenu/open-menu.wav" id="4_au42p"]
+
+[sub_resource type="FontVariation" id="FontVariation_y3020"]
+
+[sub_resource type="FontVariation" id="FontVariation_w85v5"]
+base_font = SubResource("FontVariation_y3020")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x83rc"]
+texture = ExtResource("2_kfvwh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ro8wc"]
+texture = ExtResource("2_kfvwh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_02bqk"]
+texture = ExtResource("2_kfvwh")
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cnyda")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.29219, 0.29219, 0.29219, 1)
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+localize_numeral_system = false
+texture = ExtResource("1_5xobl")
+expand_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -116.5
+offset_top = -231.0
+offset_right = 116.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 4
+
+[node name="Play" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/icon_max_width = 200
+theme_override_fonts/font = SubResource("FontVariation_w85v5")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxTexture_x83rc")
+text = "JUGAR"
+icon_alignment = 1
+
+[node name="Credits" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxTexture_ro8wc")
+text = "CREDITOS"
+
+[node name="Quit" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxTexture_02bqk")
+text = "SALIR"
+
+[node name="Sonidos" type="Node2D" parent="." groups=["Sonidos"]]
+
+[node name="SonidoFondo" type="AudioStreamPlayer" parent="Sonidos"]
+stream = ExtResource("3_rpdsj")
+volume_db = -7.545
+autoplay = true
+
+[node name="click" type="AudioStreamPlayer2D" parent="Sonidos"]
+stream = ExtResource("4_au42p")
+
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Credits" to="." method="_on_credits_mouse_entered"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Credits" to="." method="_on_credits_pressed"]
+[connection signal="mouse_entered" from="ColorRect/VBoxContainer/Quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="pressed" from="ColorRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

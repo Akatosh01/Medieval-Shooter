@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d14xsxuuo2x0w"]
+
+[ext_resource type="Script" path="res://scripts/EnemigoEscurridizo.gd" id="1_mevgl"]
+[ext_resource type="PackedScene" uid="uid://btj146lgb4xso" path="res://models/Skeleton_Rogue.glb" id="1_twf5d"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vxnol"]
+height = 2.00107
+
+[node name="Rogue_enemigo" type="Area3D"]
+script = ExtResource("1_mevgl")
+
+[node name="Skeleton_Rogue" parent="." instance=ExtResource("1_twf5d")]
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Skeleton_Rogue"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 1.12322, 0.0466621)
+shape = SubResource("CylinderShape3D_vxnol")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+target_position = Vector3(0, 0, 5)
+
+[node name="Timer" type="Timer" parent="."]

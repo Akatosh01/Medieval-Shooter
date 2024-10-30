@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cru1dlstjgdh7"]
+
+[ext_resource type="Script" path="res://models/enemigo.gd" id="1_3q45u"]
+[ext_resource type="PackedScene" uid="uid://bng2lwivdh2p6" path="res://models/Skeleton_Mage.glb" id="2_s7uix"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_poc2u"]
+height = 1.92361
+
+[node name="MagoEnemigo" type="Area3D"]
+script = ExtResource("1_3q45u")
+
+[node name="Skeleton_Mage" parent="." instance=ExtResource("2_s7uix")]
+
+[node name="AniPlayer" type="AnimationPlayer" parent="Skeleton_Mage"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00959969, 1.14578, -0.170797)
+shape = SubResource("CylinderShape3D_poc2u")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(0.720132, 0, 0, 0, 0.720132, 0, 0, 0, 0.720132, 0, 0.5, 0)
+target_position = Vector3(0, 0, 50)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true

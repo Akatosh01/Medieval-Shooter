@@ -1,0 +1,321 @@
+[gd_scene load_steps=26 format=3 uid="uid://dxvvlck8lej3f"]
+
+[ext_resource type="Texture2D" uid="uid://dfbangmvbujbu" path="res://Skybox/_0005_AllSkyFree_Screen_05.jpg" id="1_kt04r"]
+[ext_resource type="PackedScene" uid="uid://dl2ed4gkybggf" path="res://objects/player.tscn" id="2_elriq"]
+[ext_resource type="Script" path="res://scripts/hud.gd" id="3_s8mkj"]
+[ext_resource type="FontFile" uid="uid://biqtga8moh7ah" path="res://fonts/lilita_one_regular.ttf" id="3_w27de"]
+[ext_resource type="PackedScene" uid="uid://cru1dlstjgdh7" path="res://objects/mago_enemigo.tscn" id="6_iaj5u"]
+[ext_resource type="PackedScene" uid="uid://bvx5cvigosg0s" path="res://objects/platform_large_grass.tscn" id="7_wggef"]
+[ext_resource type="PackedScene" uid="uid://dnesy2bfhtihl" path="res://objects/boss.tscn" id="7_yduyk"]
+[ext_resource type="PackedScene" uid="uid://oqfhfp1a80qd" path="res://objects/cloud.tscn" id="10_5ksau"]
+[ext_resource type="PackedScene" uid="uid://c6solhcn7rr0h" path="res://objects/Pared.tscn" id="11_kx62g"]
+[ext_resource type="PackedScene" uid="uid://cagpaqlx4fm4x" path="res://dungeon objects/wall_broken.gltf.glb" id="12_manmj"]
+[ext_resource type="PackedScene" uid="uid://bevahnhy0de84" path="res://dungeon objects/tileBrickA_large.gltf.glb" id="13_54x5w"]
+[ext_resource type="PackedScene" uid="uid://bwkbfwxphqbhs" path="res://dungeon objects/wall.gltf.glb" id="13_t0wqr"]
+[ext_resource type="PackedScene" uid="uid://ryqsib58eqvi" path="res://dungeon objects/tileBrickB_large.gltf.glb" id="14_karb0"]
+[ext_resource type="PackedScene" uid="uid://c5j5fdolhlpgp" path="res://dungeon objects/floorDecoration_shatteredBricks.gltf.glb" id="14_xyx5o"]
+[ext_resource type="PackedScene" uid="uid://msnf3uppmb75" path="res://dungeon objects/tileBrickB_largeCrackedA.gltf.glb" id="15_6poy7"]
+[ext_resource type="PackedScene" uid="uid://cxy02gnfn7cam" path="res://dungeon objects/floorDecoration_woodLeft.gltf.glb" id="15_ap2ua"]
+[ext_resource type="PackedScene" uid="uid://dk4is7jleph5x" path="res://dungeon objects/torchWall.gltf.glb" id="15_jid64"]
+[ext_resource type="PackedScene" uid="uid://b7vl4xn3ctrva" path="res://dungeon objects/tileBrickB_largeCrackedB.gltf.glb" id="16_u86fo"]
+[ext_resource type="PackedScene" uid="uid://cvob74na02kkm" path="res://dungeon objects/wallCorner.gltf.glb" id="19_1eol2"]
+[ext_resource type="PackedScene" uid="uid://d14xsxuuo2x0w" path="res://objects/Rogue_enemigo.tscn" id="23_03wme"]
+[ext_resource type="AudioStream" uid="uid://bhdswpc37jrqm" path="res://Night and Day Loop 2.ogg" id="24_boiq5"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_nga35"]
+panorama = ExtResource("1_kt04r")
+
+[sub_resource type="Sky" id="Sky_dfenb"]
+sky_material = SubResource("PanoramaSkyMaterial_nga35")
+
+[sub_resource type="Environment" id="Environment_hqjjk"]
+background_mode = 2
+sky = SubResource("Sky_dfenb")
+sky_rotation = Vector3(0, 3.88336, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fpmwk"]
+font = ExtResource("3_w27de")
+font_size = 36
+outline_size = 12
+outline_color = Color(0, 0, 0, 0.470588)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hqjjk")
+
+[node name="Player" parent="." node_paths=PackedStringArray("crosshair") instance=ExtResource("2_elriq")]
+crosshair = NodePath("../HUD/Crosshair")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.422618, -0.694272, 0.582563, 0, 0.642788, 0.766044, -0.906308, 0.323744, -0.271654, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.75
+
+[node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("3_s8mkj")
+
+[node name="Crosshair" type="TextureRect" parent="HUD"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(64, 64)
+
+[node name="Health" type="Label" parent="HUD"]
+offset_left = 48.0
+offset_top = 627.0
+offset_right = 138.0
+offset_bottom = 672.0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "100%"
+label_settings = SubResource("LabelSettings_fpmwk")
+vertical_alignment = 2
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Rogue_enemigo" parent="Enemies" instance=ExtResource("23_03wme")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.7772, 0, -23.4348)
+spawn_delay = 5.0
+
+[node name="Rogue_enemigo2" parent="Enemies" instance=ExtResource("23_03wme")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 19.4235, 0, -24.2723)
+spawn_delay = 3.0
+
+[node name="MagoEnemigo" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_iaj5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.63684, 0, -21.4721)
+player = NodePath("../../Player")
+spawn_delay = 1.0
+
+[node name="MagoEnemigo2" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_iaj5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.19432, 0, -19.1502)
+player = NodePath("../../Player")
+spawn_delay = 2.0
+
+[node name="MagoEnemigo3" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_iaj5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.0813)
+player = NodePath("../../Player")
+spawn_delay = 4.0
+
+[node name="MagoEnemigo4" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_iaj5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.75778, 0, -8.99272)
+player = NodePath("../../Player")
+spawn_delay = 6.0
+
+[node name="MagoEnemigo5" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("6_iaj5u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.6331, 0, -8.94687)
+player = NodePath("../../Player")
+spawn_delay = 9.0
+
+[node name="Boss" parent="Enemies" node_paths=PackedStringArray("player") instance=ExtResource("7_yduyk")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -0.148755, 0, -21.6426)
+player = NodePath("../../Player")
+spawn_delay = 10.0
+
+[node name="Level" type="Node" parent="."]
+
+[node name="platform-large-grass" parent="Level" instance=ExtResource("7_wggef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.662879, 0)
+
+[node name="Pared" parent="Level" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.904933, 0, 4.6677)
+
+[node name="Pared" parent="Level/Pared" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.01385, 0, -0.0625148)
+
+[node name="Pared" parent="Level/Pared/Pared" instance=ExtResource("11_kx62g")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.6361, 0, -1.95002)
+
+[node name="Pared2" parent="Level/Pared" instance=ExtResource("11_kx62g")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.58006, 0, -1.94919)
+
+[node name="Pared2" parent="Level/Pared/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.81982, 0, -5.96797)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97636, 0, -0.0337591)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96767, 0, -0.00832558)
+
+[node name="Pared3" parent="Level/Pared/Pared2/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0613842, 0, 19.3902)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared3" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97636, 0, -0.0337591)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared3/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.96767, 0, -0.00832558)
+
+[node name="Pared4" parent="Level/Pared/Pared2/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.9135, 0, -0.0639515)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared4" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97636, 0, -0.0337591)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared4/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.46337, 0, -1.42956)
+
+[node name="wall_broken_gltf" parent="Level/Pared/Pared2/Pared2/Pared4/Pared2" instance=ExtResource("12_manmj")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.72478, 0, 8.71733)
+
+[node name="Pared3" parent="Level/Pared/Pared2/Pared2/Pared4" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0613842, 0, 19.3902)
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared4/Pared3" instance=ExtResource("11_kx62g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.97636, 0, -0.0337591)
+
+[node name="wall_gltf" parent="Level/Pared/Pared2/Pared2/Pared4/Pared3/Pared2" instance=ExtResource("13_t0wqr")]
+
+[node name="Pared2" parent="Level/Pared/Pared2/Pared2/Pared4/Pared3/Pared2" instance=ExtResource("11_kx62g")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.46227, 0, 1.48077)
+
+[node name="Decoration" type="Node" parent="."]
+
+[node name="cube2" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(1.49603, 0.232188, 3.70243, 1.85892, 3.40786, -0.964843, -3.21035, 2.08149, 1.16666, -9.48509, 19.0667, 20.5554)
+
+[node name="cube9" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(1.49603, 1.85892, -3.21035, 0.232188, 3.40786, 2.08149, 3.70243, -0.964843, 1.16666, 25.5597, 16.9209, -12.1167)
+
+[node name="cube5" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(3.0771, 1.12972, -2.29242, -0.0239142, 3.60054, 1.74228, 2.55556, -1.32658, 2.77656, 6.4111, 16.9209, -28.6551)
+
+[node name="cube3" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(2.12132, 0, 2.12132, 0, 3, 0, -2.12132, 0, 2.12132, -2.75413, 12.9956, 25.3984)
+
+[node name="cube10" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(0.776457, -2.89778, 2.66454e-15, 1.44889, 0.388229, -2.59808, 2.50955, 0.672432, 1.5, 27.5131, 22.5952, -5.37209)
+
+[node name="cube11" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(0.672432, 2.89778, -0.388229, -2.50955, 0.776457, 1.44889, 1.5, 0, 2.59808, -28.6125, 26.8685, -4.89238)
+
+[node name="cube12" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(0.672432, 2.89778, -0.388229, -2.50955, 0.776457, 1.44889, 1.5, 0, 2.59808, -25.14, 19.3759, -24.2564)
+
+[node name="cube6" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(-1.73205, 0.965926, 0.258819, -1, -1.67303, -0.448288, 0, -0.517638, 1.93185, 14.1295, 20.6826, 17.5347)
+
+[node name="cube7" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(1.41421, 0, -1.41421, 1, 1.41421, 1, 1, -1.41421, 1, -5.11081, 12.9956, -36.641)
+
+[node name="cube8" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(1.73205, 0, 1, 0, 2, 0, -1, 0, 1.73205, -30.1261, 12.9956, -13.7339)
+
+[node name="cube4" parent="Decoration" instance=ExtResource("10_5ksau")]
+transform = Transform3D(1.12202, 1.39419, -2.40776, 1.53922, 1.85165, 1.78946, 2.31773, -1.90463, -0.0227883, -0.881504, 23.5984, -30.1859)
+
+[node name="NodeDungeon" type="Node" parent="."]
+
+[node name="torchWall_gltf" parent="NodeDungeon" instance=ExtResource("15_jid64")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.73489, 1.49837, -1.73005)
+
+[node name="torchWall_gltf" parent="NodeDungeon/torchWall_gltf" instance=ExtResource("15_jid64")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.235, 0, 5.637)
+
+[node name="torchWall_gltf2" parent="NodeDungeon/torchWall_gltf" instance=ExtResource("15_jid64")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -6.529, 1, 11.728)
+
+[node name="torchWall_gltf" parent="NodeDungeon/torchWall_gltf/torchWall_gltf2" instance=ExtResource("15_jid64")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.235001, 0, 18.0116)
+
+[node name="torchWall_gltf2" parent="NodeDungeon/torchWall_gltf/torchWall_gltf2" instance=ExtResource("15_jid64")]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, 10.3734, 0, 17.905)
+
+[node name="torchWall_gltf" parent="NodeDungeon/torchWall_gltf/torchWall_gltf2/torchWall_gltf2" instance=ExtResource("15_jid64")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.235001, 0, 18.0116)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0.951296)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.072753, 0, -11.9783)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88518, 0, 0.0229273)
+
+[node name="tileBrickA_large_gltf2" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.04965, 0, -6.02387)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88518, 0, 0.0229273)
+
+[node name="tileBrickA_large_gltf2" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8759, 0, -6.02387)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88518, 0, 0.0229273)
+
+[node name="tileBrickA_large_gltf2" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7832, 0, 0.195845)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2/tileBrickA_large_gltf2/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88518, 0, 0.0229273)
+
+[node name="tileBrickA_large_gltf2" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2/tileBrickA_large_gltf2/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5519, 0, -0.252909)
+
+[node name="tileBrickA_large_gltf" parent="NodeDungeon/tileBrickA_large_gltf/tileBrickA_large_gltf/tileBrickA_large_gltf2/tileBrickA_large_gltf2/tileBrickA_large_gltf2/tileBrickA_large_gltf2" instance=ExtResource("13_54x5w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.88518, 0, 0.0229282)
+
+[node name="floorDecoration_shatteredBricks_gltf" parent="NodeDungeon/tileBrickA_large_gltf" instance=ExtResource("14_xyx5o")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 6.63053, 1.00213, -6.52017)
+
+[node name="floorDecoration_woodLeft_gltf" parent="NodeDungeon/tileBrickA_large_gltf" instance=ExtResource("15_ap2ua")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.87712, 0.978112, -7.2621)
+
+[node name="tileBrickB_large_gltf" parent="NodeDungeon" instance=ExtResource("14_karb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5)
+
+[node name="tileBrickB_large_gltf" parent="NodeDungeon/tileBrickB_large_gltf" instance=ExtResource("14_karb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.01249, -0.015, -0.0509963)
+
+[node name="tileBrickB_large_gltf" parent="NodeDungeon/tileBrickB_large_gltf/tileBrickB_large_gltf" instance=ExtResource("14_karb0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9922, -0.015, 0.0314784)
+
+[node name="tileBrickB_largeCrackedA_gltf" parent="NodeDungeon" instance=ExtResource("15_6poy7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99944, -1, -23.0405)
+
+[node name="tileBrickB_largeCrackedB_gltf" parent="NodeDungeon" instance=ExtResource("16_u86fo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.94097, -1, -11.023)
+
+[node name="tileBrickB_largeCrackedB_gltf" parent="NodeDungeon/tileBrickB_largeCrackedB_gltf" instance=ExtResource("16_u86fo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.8626, 0, -6.035)
+
+[node name="wallCorner_gltf" parent="NodeDungeon" instance=ExtResource("19_1eol2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6611, 0, -1.28081)
+
+[node name="wallCorner_gltf" parent="NodeDungeon/wallCorner_gltf" instance=ExtResource("19_1eol2")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 7.18709, 0, -0.0499326)
+
+[node name="wall_gltf" parent="NodeDungeon" instance=ExtResource("13_t0wqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.97121, 0, -26.7281)
+
+[node name="wall_gltf2" parent="NodeDungeon" instance=ExtResource("13_t0wqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.0026, 0, -26.7294)
+
+[node name="wall_gltf3" parent="NodeDungeon" instance=ExtResource("13_t0wqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.97907, 0, -26.7451)
+
+[node name="wall_gltf4" parent="NodeDungeon" instance=ExtResource("13_t0wqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.9578, 0, -26.729)
+
+[node name="wall_gltf5" parent="NodeDungeon" instance=ExtResource("13_t0wqr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9411, 0, -26.7219)
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="NightAndDayLoop2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_boiq5")
+autoplay = true
+
+[connection signal="health_updated" from="Player" to="HUD" method="_on_health_updated"]

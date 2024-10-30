@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkjs6iq1y0qbu"]
+
+[ext_resource type="Script" path="res://Creditos/creditos.gd" id="1_csry6"]
+
+[node name="Creditos" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_csry6")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.0980392, 1)
+
+[node name="Margin" type="MarginContainer" parent="Background"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+
+[node name="Texto" type="RichTextLabel" parent="Background/Margin"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/default_color = Color(0, 0.764706, 1, 1)
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "			
+				CREDITOS
+"
+selection_enabled = true
+
+[node name="Nombres" type="MarginContainer" parent="Background"]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -100.0
+offset_right = 300.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Texto" type="RichTextLabel" parent="Background/Nombres"]
+layout_mode = 2
+focus_mode = 2
+theme_override_colors/default_color = Color(0, 1, 0.364706, 1)
+theme_override_font_sizes/normal_font_size = 30
+bbcode_enabled = true
+text = "					Samuel Mamani
+					Maicol Lanza
+					Jose Urzagaste
+					Diego Gonzales"
+tab_size = 5
+selection_enabled = true
+
+[node name="Back" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="pressed" from="Back" to="." method="_on_back_pressed"]

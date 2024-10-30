@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bhdswpc37jrqm"
+path="res://.godot/imported/Night and Day Loop 2.ogg-f303178d0c28e077e4154a1344ae19e5.oggvorbisstr"
+
+[deps]
+
+source_file="res://Night and Day Loop 2.ogg"
+dest_files=["res://.godot/imported/Night and Day Loop 2.ogg-f303178d0c28e077e4154a1344ae19e5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

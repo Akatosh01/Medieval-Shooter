@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://c6solhcn7rr0h"]
+
+[ext_resource type="PackedScene" uid="uid://bwkbfwxphqbhs" path="res://dungeon objects/wall.gltf.glb" id="1_ufdqy"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dhb13"]
+resource_name = "wall_gltf_Cube_4530"
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n6wfy"]
+
+[node name="Pared" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_dhb13")
+
+[node name="wall_gltf" parent="MeshInstance3D" instance=ExtResource("1_ufdqy")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_n6wfy")

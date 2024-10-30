@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnesy2bfhtihl"]
+
+[ext_resource type="PackedScene" uid="uid://djsggm2uc78h2" path="res://models/Skeleton_Warrior.glb" id="1_giuuu"]
+[ext_resource type="Script" path="res://scripts/Boss.gd" id="1_ivrxq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vtc5f"]
+size = Vector3(1.72803, 5.28485, 1.39978)
+
+[node name="Boss" type="Area3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_ivrxq")
+
+[node name="Skeleton_Warrior" parent="." instance=ExtResource("1_giuuu")]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Skeleton_Warrior"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0267438, 1.95724, 0.23763)
+shape = SubResource("BoxShape3D_vtc5f")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+target_position = Vector3(0, 0, 5)
+
+[node name="Timer" type="Timer" parent="."]
